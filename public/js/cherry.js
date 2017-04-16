@@ -19,11 +19,11 @@
      /**
           * 初始化Session对象
           */
+        var audioPalyUrl = "http://h5.xf-yun.com/audioStream/";
         var session = new IFlyTtsSession({
-                                      'url' : 'http://webapi.openspeech.cn/',
-                                      'interval' : '30000',
-                                      'disconnect_hint' : 'disconnect',
-                                      'sub' : 'tts'
+                                    'url'                : 'ws://h5.xf-yun.com/tts.do',
+                                    'reconnection'       : true,
+                                    'reconnectionDelay'  : 30000
                                  });
         var audio = null;
 
@@ -31,7 +31,7 @@
           * 输入文本，输出语音播放链接
           * @content 待合成文本(不超过4096字节)
           */
-        cherry.play = function(content,vcn,spd,vol,callback) {
+        cherry.play = function(content,vcn,callback) {
 
             /************* 等待框 **************/
             var $loadingEl = $.loading({
@@ -44,24 +44,30 @@
 
             /***********************************************************以下签名过程需根据实际应用信息填入***************************************************/
 
-            var appid = "54c88b8d";                              //应用APPID，在open.voicecloud.cn上申请即可获得
+            //var appid = "54c88b8d";                              //应用APPID，在open.voicecloud.cn上申请即可获得
 
             // var timestamp = new Date().toLocaleTimeString();
-            var timestamp = (new Date()).valueOf();                      //当前时间戳，例new Date().toLocaleTimeString()
-            var expires = 60000;                          //签名失效时间，单位:ms，例60000
+            //var timestamp = (new Date()).valueOf();                      //当前时间戳，例new Date().toLocaleTimeString()
+            //var expires = 60000;                          //签名失效时间，单位:ms，例60000
             //!!!为避免secretkey泄露，签名函数调用代码建议在服务器上完成
-            var signature = faultylabs.MD5(appid + '&' + timestamp + '&' + expires + '&' + "6a97bfd7fa4531f7");
+            //var signature = faultylabs.MD5(appid + '&' + timestamp + '&' + expires + '&' + "6a97bfd7fa4531f7");
            /************************************************************以上签名过程需根据实际应用信息填入**************************************************/
-
-            var params = { "params" : "aue = speex-wb;7, ent = intp65, spd = "+spd+", vol = "+vol+", tte = utf8,vcn = "+vcn+", caller.appid=" + appid + ",timestamp=" + timestamp + ",expires=" + expires, "signature" : signature, "gat" : "mp3"};
+           var ssb_param = {"appid": '56d46902', "appkey":"008426b47fe041c1", "synid":"12345", "params" : "ent=aisound,aue=lame,vcn="+vcn};
+            //var params = { "params" : "aue = speex-wb;7, ent = intp65, spd = "+spd+", vol = "+vol+", tte = utf8,vcn = "+vcn+", caller.appid=" + appid + ",timestamp=" + timestamp + ",expires=" + expires, "signature" : signature, "gat" : "mp3"};
 
             // $(".content").text("timestamp:"+signature);
 
 
-            session.start(params, content, function (err, obj)
+            //session.start(params, content, function (err, obj)
+            session.start(ssb_param, content, function (err, obj)
             {
                 
-
+                //var audio_url = audioPalyUrl + obj.audio_url;
+                // if( audio_url != null && audio_url != undefined )
+                // {
+                //     window.iaudio.src = audio_url;
+                //     window.iaudio.play();
+                // }
                 if(err) {
                     $loadingEl.loading("hide");
                     tip("语音合成发生错误，错误代码 ：" + err);
@@ -76,7 +82,8 @@
                     audio = new Audio();
                     // audio.src = '';
                     // audio.play();
-                    audio.src = "http://webapi.openspeech.cn/" + obj.audio_url;
+                    //audio.src = "http://webapi.openspeech.cn/" + obj.audio_url;
+                    audio.src = audioPalyUrl + obj.audio_url;
                     // audio.play();
                     callback.success(audio);
                     // $loadingEl.loading("hide");

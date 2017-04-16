@@ -566,7 +566,7 @@
 			// }
 			// }
     		// $(".pages").css("-webkit-transform", "matrix(1, 0, 0, 1, 0, 0)");
-		})
+		// })
 
 		var textContent = ["你追我，如果你追到我，我就让你嘿嘿嘿","我呸我呸我呸呸呸","这个逼装的我给102分，多一分关心，多一分热爱",
 		"可是臣妾做不到啊！臣妾做不到啊！做不到啊","一时之间，我竟没有抵抗", "跟着我就能够找到爱","今天天气好晴朗，处处好风光","被水淹没！不知所措",
@@ -651,7 +651,7 @@
 			var spd = 10;//语速
 			var vol = 10;//音量
 			$this = $(this);
-			var audio = cherry.play(content,vcn,spd,vol,{
+			var audio = cherry.play(content,vcn,{
 				success:function(audio){
 					console.log(audio);
 					console.log(audio.id);
