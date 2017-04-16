@@ -120,16 +120,20 @@
 	.voice-li{
 		display: inline-block;
 		padding:10px;
-		width: 50px;
+		width: 65px;
 		height: 70px;
 		font-size: 12px;
 		text-align: center;
 	}
+	.voice-li label{
+		margin-left: 16px;
+	}
 	.voice-img{
-		width: 50px;
+		width: 65px;
 		/*height: 50px;*/
-		height: 58px;
+		height: 65px;
 		margin-bottom: 5px;
+		margin-left: 8px;
 		/*border-radius: 50%;*/
 		/*background-color: #FF6A00;*/
 	}
@@ -138,7 +142,7 @@
 	}
 	.voice-active label{
 		color: white;
-		padding: 1px 7px;
+		padding: 1px 4px;
 		border-radius: 6px;
 		background: #0090ff;
 	}
@@ -152,7 +156,7 @@
 	}
 
 	.voice-menu{
-		width: 80%;
+		width: 40%;
 		height: 30px;
 		margin:30px auto;
 		margin-bottom: 10px;
@@ -160,7 +164,7 @@
 		border: 1px solid #FDE7DC;
 	}
 	.menu-li{
-		width: 33.3%;
+		width: 50%;
 		height: 30px;
 		line-height: 30px;
 		float: left;
@@ -178,6 +182,7 @@
 		width: 50px;
 		text-align: center;
 		margin-top: 10px;
+		margin-left: 15px;
 	}
 	.spinner {
 	  width: 32px;
@@ -301,7 +306,7 @@
 		position: absolute;
 		width: 100%;
 		text-align: center;
-    bottom: 30px;
+    	bottom: 30px;
 	}
 	.foot-button{
 		width: 110px;
@@ -331,7 +336,7 @@
 			<div class="choose page">
 				<div class="voice-content">
 					<div class="voice-ul">
-						<div class="voice-menu" >
+						<div class="voice-menu">
 							<% for(var i = 0; i < tts.length;i++ ){ %>
 								<% if(i == 0){ %>
 									<div class="menu-li active"  id="menu<%= i %>"><%= tts[i].type %></div>
@@ -342,7 +347,7 @@
 						</div>
 					<% for(var i = 0; i < tts.length;i++ ){ %>
 						<% if(i == 0){ %>
-							<div class="voice-menu-content menu<%= i %>" style="margin-top: -10px;">
+							<div class="voice-menu-content menu<%= i %>"  style="margin-top:-10px">
 								<% for(var key in tts[i].content){ %>
 
 						  			<div class="voice-li" data-vcn="<%= tts[i].content[key].vcn %>" >
@@ -457,7 +462,6 @@
 
 	    </div>
 	</div>
-
 	<!-- <audio src="" class="audio" id="audio" style="display:none">
 		您的浏览器不支持 audio 标签。
 	</audio> -->
@@ -498,8 +502,70 @@
 
 		})
 
-		$(".return").on("click",function(){
-    		$(".pages").css("-webkit-transform", "matrix(1, 0, 0, 1, 0, 0)");
+		// $(".return").on("click",function(){
+		// 	var volices = ["http://webapi.openspeech.cn/cttsPPPHHBBHNTZa-aQSHJGwlmMmaxoWSM06emmmmmmm5vk5A.mp3","http://webapi.openspeech.cn/cttsPPPHHBBHNTZdWaQSjgKw15f45UoaHn1Yummmmmmm5RkOE.mp3","http://webapi.openspeech.cn/cttsPPPHHBBHNTZ1laQSVN6wk1oxBEddOvurEmmmmmmm5R5pE.mp3"];
+		// 	var length = volices.length;
+		// 	var num = Math.floor(Math.random()*volices.length);
+		// 	console.log(num);
+		// 	audio = new Audio();
+		// 	audio.src = volices.pop();//每次读数组最后一个元素
+  //       	audio.addEventListener('ended', playEndedHandler, false);
+  //       	audio.play();
+  //       	// document.getElementById("audioBox").appendChild(audio);
+  //       	audio.loop = false;//禁止循环，否则无法触发ended事件
+  //       	function playEndedHandler(){
+  //           	audio.src = volices.pop();
+  //           	audio.play();
+  //           	console.log(volices.length);
+  //           	!volices.length && audio.removeEventListener('ended',playEndedHandler,false);//只有一个元素时解除绑定
+  //       	}
+
+			// for(var i = 0;i <= num;){
+			// 	audio = new Audio();
+			// 	audio.src = volices[i];
+			// 	console.log(audio.src);
+			// 	console.log(audio);
+			// 	audio.play();
+			// 	var is_playFinish = setInterval(function(){
+			// 			console.log(audio.ended);
+			// 			if(audio.ended){
+			// 				// $(".load").hide();
+			// 				console.log("结束");
+			// 				// $this.children(".load").hide();
+			// 				window.clearInterval(is_playFinish);
+			// 			}
+			// 		}, 10);
+			// 	console.log(i);
+			// 	i++;
+			// window.location.href = audio.src;//音频下载
+			// }
+			// var n = plays(volices,num);
+			// var n = 0;
+			// if(n <=num){
+			// 	n = plays(volices,n);
+			// 	console.log(n);
+			// }
+
+			// for(var i = 0;i <= num; i++){
+			// }
+			//语音播放
+			// audio = new Audio();
+			// audio.src = "/audio/test.mp3";
+			// audio.src = "http://webapi.openspeech.cn/cttsPPPHHBBHNTCAFaFWS9lawws1wIluv20XTmmmmmmmkAkmm.mp3";
+			// console.log(audio);
+			// audio.play();
+
+
+			// audio.autoplay = true;
+			// audio.addEventListener('canplay', canPlay, false);
+			// console.log(123456);
+			// var audio = document.createElement("AUDIO");
+			// audio.setAttribute("src", "http://webapi.openspeech.cn/cttsPPPHHBBHNT0aqa2fm2BwM0FNB-q5uPagImmmmmmmEBmsm.mp3");
+			// console.log(audio);
+			// audio.play();
+			// }
+			// }
+    		// $(".pages").css("-webkit-transform", "matrix(1, 0, 0, 1, 0, 0)");
 		})
 
 		var textContent = ["你追我，如果你追到我，我就让你嘿嘿嘿","我呸我呸我呸呸呸","这个逼装的我给102分，多一分关心，多一分热爱",
@@ -582,10 +648,14 @@
 			$(this).addClass("voice-active");
 			var content = $(".text-content").val();
 			var vcn = $(".voice-active").data("vcn");
+			var spd = 10;//语速
+			var vol = 10;//音量
 			$this = $(this);
-			var audio = cherry.play(content,vcn,{
+			var audio = cherry.play(content,vcn,spd,vol,{
 				success:function(audio){
 					console.log(audio);
+					console.log(audio.id);
+					console.log(audio.src);
 					audio.play();
 					$(".load").hide();
 					$this.children(".load").show();
@@ -598,6 +668,7 @@
 							window.clearInterval(is_playFinish);
 						}
 					}, 10);
+					// window.location.href = audio.src;//音频下载
 				},
 				error:function(){
 					$(".load").hide();
@@ -612,7 +683,36 @@
 			$("."+this.id).show();
 		})
 
-
+		function plays(volices,num,callback){
+			var n = 0;
+			audio = new Audio();
+			audio.src = volices[n];
+			console.log(audio.src);
+			console.log(audio);
+			audio.play();
+			console.log(audio.ended);
+			var is_playFinish = setInterval(function(){
+						console.log(audio.ended);
+						if(audio.ended){
+							// $(".load").hide();
+							console.log("结束");
+							// $this.children(".load").hide();
+							window.clearInterval(is_playFinish);
+						}
+					}, 10);
+			if(audio.ended){
+				n = n + 1;
+				console.log(n);
+				// callback.success(n);
+				if(n<=num){
+					plays(volices,num);
+				}
+				else{
+					callback.success(n);
+				}
+			}
+			console.log(n);
+		}
 
 		// var data = {
 	 //      	content : "你是傻逼",

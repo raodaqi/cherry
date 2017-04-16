@@ -1,5 +1,5 @@
 /**
- *Created by DuckyRao on 2016/3/1
+ *Created by  on 2016/3/1
  */
 +(function(){
 
@@ -31,7 +31,7 @@
           * 输入文本，输出语音播放链接
           * @content 待合成文本(不超过4096字节)
           */
-        cherry.play = function(content,vcn,callback) {
+        cherry.play = function(content,vcn,spd,vol,callback) {
 
             /************* 等待框 **************/
             var $loadingEl = $.loading({
@@ -53,12 +53,14 @@
             var signature = faultylabs.MD5(appid + '&' + timestamp + '&' + expires + '&' + "6a97bfd7fa4531f7");
            /************************************************************以上签名过程需根据实际应用信息填入**************************************************/
 
-            var params = { "params" : "aue = speex-wb;7, ent = intp65, spd = 50, vol = 50, tte = utf8,vcn = "+vcn+", caller.appid=" + appid + ",timestamp=" + timestamp + ",expires=" + expires, "signature" : signature, "gat" : "mp3"};
+            var params = { "params" : "aue = speex-wb;7, ent = intp65, spd = "+spd+", vol = "+vol+", tte = utf8,vcn = "+vcn+", caller.appid=" + appid + ",timestamp=" + timestamp + ",expires=" + expires, "signature" : signature, "gat" : "mp3"};
 
             // $(".content").text("timestamp:"+signature);
 
+
             session.start(params, content, function (err, obj)
             {
+                
 
                 if(err) {
                     $loadingEl.loading("hide");
